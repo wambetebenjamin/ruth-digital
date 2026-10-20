@@ -2273,3 +2273,18 @@ a.rd-visually-hidden:focus-visible {
 [id] {
   scroll-margin-top: calc(var(--rd-nav-height) + 16px);
 }
+
+/* Safety net: the loader is removed by React after 1.5 seconds, exactly as the
+   template does. If JavaScript ever fails to hydrate, this keeps the page from
+   staying behind the overlay. */
+.rd-loader {
+  animation: rd-loader-failsafe 400ms ease 2.4s forwards;
+}
+
+@keyframes rd-loader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
